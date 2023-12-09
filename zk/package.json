@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@aztec/bb.js": "^0.16.7",
+    "@noir-lang/backend_barretenberg": "^0.19.4",
+    "@noir-lang/noir_js": "^0.19.4",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "ts-node": "^10.9.2",
+    "tslib": "^2.6.2"
+  }
+}
