@@ -42,6 +42,7 @@ const Home: NextPage = () => {
             onSubmit={async (e) => {
               e.preventDefault();
               console.log(form.values);
+              router.push("/dashboard");
             }}
           >
             <Center mih={600}>

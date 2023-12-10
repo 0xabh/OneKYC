@@ -76,6 +76,22 @@ const Completed = () => {
         >
           Click here for verifying bank details &rarr;
         </Text>
+        <Text
+          component="a"
+          href="/dashboard"
+          style={{
+            color: "black",
+            fontFamily: "sans-serif",
+            fontSize: "24px",
+            fontStyle: "normal",
+            fontWeight: 400,
+            lineHeight: "normal",
+            textDecoration: "underline",
+            textUnderlineOffset: "5px",
+          }}
+        >
+          Click here to go to dashboard &rarr;
+        </Text>
       </Flex>
     </Center>
   );

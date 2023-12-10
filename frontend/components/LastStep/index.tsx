@@ -6,6 +6,7 @@ import {
   Button,
   Text,
   Flex,
+  LoadingOverlay,
 } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
@@ -20,6 +21,7 @@ import {
 } from "wagmi";
 import { generateProof, mintSBT } from "../../utils/mintSBT";
 import { useState } from "react";
+import { useDisclosure } from "@mantine/hooks";
 
 // get signer and address from wagmi useAccount
 // trigger the mint flow
@@ -29,6 +31,8 @@ const LastStep = ({ nextStep, prevStep }: { nextStep: any; prevStep: any }) => {
   const { address } = useAccount();
   const { chain } = useNetwork();
   const [transactionHash, setTransactionHash] = useState("");
+  const [visible, { toggle }] = useDisclosure(false);
+
   // const publicClient = usePublicClient()
   // const { data, isLoading, isSuccess, write} = useContractWrite({
   //   address: address,
@@ -48,6 +52,7 @@ const LastStep = ({ nextStep, prevStep }: { nextStep: any; prevStep: any }) => {
   });
   const claimKyc = async () => {
     // update as per chain
+    toggle()
     const userDetails = localStorage.getItem("userDetails");
     const parseData = JSON.parse(userDetails as string);
     console.log(parseData, "parseData Here");
@@ -65,9 +70,11 @@ const LastStep = ({ nextStep, prevStep }: { nextStep: any; prevStep: any }) => {
     console.log(chain?.name, mint);
     console.log(proof);
     localStorage.removeItem(`${chain?.name}TxHash`)
+    localStorage.removeItem(`${chain?.name}TxHash`)
     localStorage.setItem(`${chain?.name}TxHash`, mint.hash);
     window.open(chain?.name === "Alfajores" ? `https://alfajores.celoscan.io/tx/${mint.hash}` : `https://sepolia-blockscout.scroll.io/tx/${mint.hash}`)
     setTransactionHash(mint.hash);
+    toggle()
   };
 
   return (
@@ -100,13 +107,14 @@ const LastStep = ({ nextStep, prevStep }: { nextStep: any; prevStep: any }) => {
             fontWeight: 400,
           }}
           mt={"md"}
-          onClick={() => {
-            claimKyc();
+          onClick={async () => {
+            await claimKyc();
             setTimeout(() => {
               nextStep();
             }, 3000)
           }}
         >
+           <LoadingOverlay visible={visible} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} loaderProps={{color: "gray"}} />
           Claim KYC
         </Button>
         {transactionHash !== "" ? (
