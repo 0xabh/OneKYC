@@ -99,6 +99,7 @@ const Home: NextPage = () => {
                 <Link
                   href={chain?.name === "Alfajores" ? `https://alfajores.celoscan.io/tx/${txHash}` : `https://sepolia-blockscout.scroll.io/tx/${txHash}`}
                   style={{ textUnderlineOffset: "5px", color: "black" }}
+                  target="_blank"
                 >
                   Click here for hash &rarr;
                 </Link>
