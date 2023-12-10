@@ -64,6 +64,7 @@ const LastStep = ({ nextStep, prevStep }: { nextStep: any; prevStep: any }) => {
     );
     console.log(chain?.name, mint);
     console.log(proof);
+    localStorage.removeItem(`${chain?.name}TxHash`)
     localStorage.setItem(`${chain?.name}TxHash`, mint.hash);
     window.open(chain?.name === "Alfajores" ? `https://alfajores.celoscan.io/tx/${mint.hash}` : `https://sepolia-blockscout.scroll.io/tx/${mint.hash}`)
     setTransactionHash(mint.hash);

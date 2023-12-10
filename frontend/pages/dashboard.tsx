@@ -30,11 +30,15 @@ const Home: NextPage = () => {
   const [name, setName] = useState("");
 
   useEffect(() => {
+    console.log(chain?.name);
     if(chain?.name){
       const txHash = localStorage.getItem(`${chain?.name}TxHash`);
+      console.log(txHash);
       setTxHash(txHash ?? "");
     }
   }, [chain?.name])
+
+  console.log('txHash', txHash)
 
   return (
     <div>
