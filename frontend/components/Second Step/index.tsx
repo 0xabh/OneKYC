@@ -16,7 +16,7 @@ const SecondStep = ({
     },
     validate: {
       otp: (value) =>
-        value.length == 4 && /^\d+$/.test(value)
+      value.length < 7 && /^\d+$/.test(value)
           ? null
           : "Please enter a valid OTP",
     },

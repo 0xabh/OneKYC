@@ -10,6 +10,7 @@ import { DateInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 import { BigNumber, ethers } from "ethers";
 import StepButtons from "../StepButtons";
+import { useRouter } from "next/router";
 
 const FirstStep = ({
   nextStep,
@@ -18,6 +19,7 @@ const FirstStep = ({
   nextStep: any;
   prevStep: any;
 }) => {
+  const router = useRouter()
   const form = useForm({
     initialValues: {
       pan: "",
@@ -152,7 +154,7 @@ const FirstStep = ({
         </Center>
         <StepButtons
           nextStep={nextStep}
-          prevStep={prevStep}
+          prevStep={() => router.push("/")}
           action={() => console.log("action")}
         />
       </form>
